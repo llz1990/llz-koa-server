@@ -6,6 +6,11 @@ const users = new Router();
 const query = require('../db/index');
 const Utils = require('../common/util');
 
+// 用户登录验证：
+users.post('/login', async (ctx, next) => {
+  ctx.body = ctx;
+})
+
 // 取用户信息：
 users.get('/user', async (ctx, next)=> {
   const data = await new Promise( (resolve, reject) => {
