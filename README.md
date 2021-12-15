@@ -1,3 +1,6 @@
+## github
+git 提交代码之前执行 git config --global --unset http.proxy (由于本地访问github有代理，故提交的时候需要忽略代理提交)
+
 # koa-server 项目构建
 ```js
 
