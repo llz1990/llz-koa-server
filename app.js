@@ -5,7 +5,7 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-const errorHandle = require('./routes/errorHandle');
+const errorHandle = require('./router/errorHandle');
 
 //相关中间件 middlewares
 app.use(bodyparser({
@@ -27,7 +27,7 @@ app.use(async (ctx, next) => {
 })
 
 // router 路由
-const router = require('./routes/index')
+const router = require('./router/index')
 app.use(router.routes(), router.allowedMethods())
 
 // 当上面的路由不通时，会调用错误处理中间件
