@@ -1,5 +1,5 @@
 /**
- * 主页信息
+ * 菜单信息 created by llz
  */
 const Router = require('koa-router');
 const list = new Router();
