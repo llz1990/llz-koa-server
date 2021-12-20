@@ -10,7 +10,11 @@ const Validate = require('../common/Validate');
 
 // 注册用户信息：
 users.post('/register', async (ctx, next) => {
-  
+  const {name, password} = ctx.request.body;
+  const validate = Validate.loginCheck({name, password});
+  if(validate) {
+    ctx.throw(400, '参数错误!');
+  }
 })
 
 // 用户登录验证：
