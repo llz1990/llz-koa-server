@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-const { callback } = require('../app');
 const config = require('../config');
 // 创建连接池
 const pool = mysql.createPool({
@@ -15,14 +14,14 @@ const pool = mysql.createPool({
  * @param {*} sql 执行的sql语句
  * @returns 
  */
-const dbQuery = async sql => {
+const query = async sql => {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
-            if(err) {
+            if (err) {
                 reject('数据库连接错误');
             } else {
-                connection.query(sql, (error, data)=> {
-                    if(error) {
+                connection.query(sql, (error, data) => {
+                    if (error) {
                         reject('数据库查询错误');
                     } else {
                         resolve(data);
@@ -34,5 +33,9 @@ const dbQuery = async sql => {
     })
 }
 
+// 查找某个用户是否存在
+exports.findUserData = async (name, password) => {
+    let sql = `select * from users where name= "${name}" and password = "${password}";`
+    return query(sql);
+}
 
-module.exports = dbQuery;

@@ -3,9 +3,8 @@ const errorHandle = async (ctx, next) => {
         let fileName = "";
         console.log('进入错误处理中间件 ==========================>')
         try{
-            // 等待返回的状态 status 取值：
             await next();
-            status = ctx.status;
+            status = ctx.status;   // 取路由正常返回的状态
         }catch(err){
             status = 500;
         }
@@ -22,7 +21,7 @@ const errorHandle = async (ctx, next) => {
             }
         }
         ctx.response.status = status;
-        ctx.response.body = `取到错误信息：${status}`;
+        ctx.response.body = `取到路由错误信息，错误状态码为: ${status}`;
     };
 
 module.exports = errorHandle;
