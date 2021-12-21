@@ -39,3 +39,9 @@ exports.findUserData = async (name, password) => {
     return query(sql);
 }
 
+// 注册用户
+exports.registerData= async (name, password) =>{
+    let sql = `insert into users set name= "${name}", password = "${password}", avator= '', moment = '';`
+    return query(sql);
+}
+
