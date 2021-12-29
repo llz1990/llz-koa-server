@@ -1,5 +1,5 @@
 /**
- * 所有的路由封装
+ * 所有的路由集合的封装
  */
 const Router = require('koa-router');
 const router = new Router();

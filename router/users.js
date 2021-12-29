@@ -75,10 +75,5 @@ users.post('/checkToken', async (ctx, next) => {
   }
 })
 
-// 账号退出登录
-users.post('/logout', async (ctx) => {
-  ctx.session = null;  // 清空session
-  ctx.body = { code: 200, data: '用户退出登录' };;
-})
 
 module.exports = users
