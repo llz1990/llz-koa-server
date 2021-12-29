@@ -22,7 +22,7 @@ users.post('/register', async (ctx, next) => {
   const passwordMd5 = md5.update(password).digest("hex");
   try {
     const sqlData = await model.registerData(name, passwordMd5);
-    ctx.body = '用户注册成功';
+    ctx.body = { code: 200, data: '用户注册成功' };
   } catch (err) {
     ctx.throw(400, '用户注册失败');
   }
@@ -32,7 +32,6 @@ users.post('/register', async (ctx, next) => {
 // 用户登录：
 users.post('/login', async (ctx, next) => {
   const { name, password } = ctx.request.body;
-  console.log(ctx.request.body)
   const validate = Validate.loginCheck({ name, password });
   if (validate) {
     ctx.throw(400, '参数错误!');
@@ -40,20 +39,46 @@ users.post('/login', async (ctx, next) => {
   const sqlData = await model.findUserData(name, password);  // 查找用户是否存在
   if (sqlData && sqlData.length > 0) {
     // 登录后获取token值
-    const id = sqlData[0].id;
+    const userId = sqlData[0].userId;
     const token = jwtService.sign({
-      userId: id,
+      userId
     });
-    ctx.body = token;
+    ctx.body = { code: 200, data: token };
   } else {
     ctx.throw(400, '登录账户或者密码错误!');
+  }
+})
+
+/**
+ * 通过前端的取到的token 来验证并返回当前用户信息
+ */
+users.post('/checkToken', async (ctx, next) => {
+  const { token } = ctx.request.body;
+  if (!token) {
+    ctx.throw(401, "请先登录账号");
+  }
+  let data = jwtService.verify(token);   // 通过取到的token 信息验证当前用户
+  if (!data || !data.userId) {
+    ctx.throw(401, "token已经过期，请重新登录");
+  }
+  const sqlData = await model.findUserById(data.userId);  // 查找用户是否存在
+  const userList = {
+    roles: [sqlData[0].roles],
+    name: sqlData[0].name,
+    avatar: sqlData[0].avatar
+  }
+  ctx.body = {
+    code: 200,
+    data: {
+      userList
+    }
   }
 })
 
 // 账号退出登录
 users.post('/logout', async (ctx) => {
   ctx.session = null;  // 清空session
-  ctx.body = '用户退出登录';
-});
+  ctx.body = { code: 200, data: '用户退出登录' };;
+})
 
 module.exports = users

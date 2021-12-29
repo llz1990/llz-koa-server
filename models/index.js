@@ -45,3 +45,8 @@ exports.registerData= async (name, password) =>{
     return query(sql);
 }
 
+// 通过用户ID查询用户信息
+exports.findUserById = async (userId) => {
+    let sql = `select * from users where userId= "${userId}";`
+    return query(sql);
+}
