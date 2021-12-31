@@ -26,7 +26,8 @@ const query = async sql => {
                     } else {
                         resolve(data);
                     }
-                })
+                });
+                connection.release(); // 每一次sql语句执行完需要释放连接池
             }
 
         })
