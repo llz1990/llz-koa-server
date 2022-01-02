@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const config = require('../config');
+const list = require('../router/list');
 // 创建连接池
 const pool = mysql.createPool({
     host: config.database.HOST,          // 连接的服务器(代码托管到线上后，需改为内网IP，而非外网)
@@ -49,5 +50,23 @@ exports.registerData= async (name, password) =>{
 // 通过用户ID查询用户信息
 exports.findUserById = async (userId) => {
     let sql = `select * from users where userId= "${userId}";`
+    return query(sql);
+}
+
+// 查询相册合集
+exports.selectAllPicList = async () => {
+    let sql = `select * from pic_list`;
+    return query(sql);
+}
+
+// 增加相册合集
+exports.addPic = async (listId, listName, backUrl, descInfo) => {
+    let sql = `insert into pic_list (listId, listName, backUrl, descInfo) values ("${listId}", "${listName}", "${backUrl}", "${descInfo}");`;
+    return query(sql);
+}
+
+// 删除指定相册合集
+exports.deletePic = async (listId) => {
+    let sql = `delete from pic_list where listId = "${listId}"`;
     return query(sql);
 }
