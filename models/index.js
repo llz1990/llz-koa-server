@@ -65,6 +65,12 @@ exports.addPic = async (listId, listName, backUrl, descInfo) => {
     return query(sql);
 }
 
+// 编辑相册合集
+exports.editPic = async (listId, listName, backUrl, descInfo) => {
+    let sql = `update pic_list set listName="${listName}", backUrl="${backUrl}", descInfo="${descInfo}" where listId="${listId}";`;
+    return query(sql);
+}
+
 // 删除指定相册合集
 exports.deletePic = async (listId) => {
     let sql = `delete from pic_list where listId = "${listId}"`;

@@ -33,6 +33,20 @@ list.post('/addPic', async(ctx, next) =>{
   }
 })
 
+/**
+ * 编辑相册
+ */
+ list.post('/editPic', async(ctx, next) =>{
+  try{
+    const {listId, listName, backUrlBase64, descInfo } = ctx.request.body
+    const backUrl = await Utils.readBase64(backUrlBase64);
+    const sqlData = await model.editPic(listId, listName, backUrl, descInfo);
+    ctx.body = { code: 200, data: sqlData };
+  } catch (err) {
+    ctx.throw(400, '编辑相册合集失败')
+  }
+})
+
 list.delete('/deletePic', async(ctx, next) => {
   try{
     const { listId } = ctx.request.body;
