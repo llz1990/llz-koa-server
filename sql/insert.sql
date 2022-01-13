@@ -21,3 +21,13 @@ values
         'https://wx.qlogo.cn/mmopen/vi_32/un2HbJJc6eiaviaibvMgiasFNlVDlNOb9E6WCpCrsO4wMMhHIbsvTkAbIehLwROVFlu8dLMcg00t3ZtOcgCCdcxlZA/132',
         ''
     );
+
+-- pic_list表插入
+insert into
+    pic_detail (picId, listId, picUrl)
+values
+    (
+        'pic001',
+        'list1641138815026',
+        'https://wx.qlogo.cn/mmopen/vi_32/un2HbJJc6eiaviaibvMgiasFNlVDlNOb9E6WCpCrsO4wMMhHIbsvTkAbIehLwROVFlu8dLMcg00t3ZtOcgCCdcxlZA/132'
+    );

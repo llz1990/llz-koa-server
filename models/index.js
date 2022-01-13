@@ -76,3 +76,14 @@ exports.deletePic = async (listId) => {
     let sql = `delete from pic_list where listId = "${listId}"`;
     return query(sql);
 }
+
+// 指定相册合集查找相片
+exports.getPicDetailById = async (listId) => {
+    let sql = `select * from pic_detail where listId = "${listId}"`;
+    return query(sql);
+}
+// 指定相册合集添加相片
+exports.addPicDetail = async (listId, picId, picUrl) => {
+    let sql = `insert into pic_detail (picId, listId, picUrl) values ("${picId}", "${listId}", "${picUrl}");`;
+    return query(sql);
+}

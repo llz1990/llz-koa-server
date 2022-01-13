@@ -32,9 +32,7 @@ create table if not exists pic_detail(
     id INT NOT NULL AUTO_INCREMENT,
     picId VARCHAR(100) NOT NULL,
     listId VARCHAR(100) NOT NULL,
-    picName VARCHAR(100) NOT NULL,
     picUrl VARCHAR(2000) NOT NULL,
-    descInfo VARCHAR(2000) NOT NULL,
     PRIMARY KEY (id),
     index(picId, listId)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;

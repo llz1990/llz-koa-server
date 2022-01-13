@@ -37,6 +37,40 @@ class Validate {
         })
         return error;
     }
+
+    /**
+     *  添加新的相册参数校验
+     * @param {*} params 
+     */
+    static addPicCheck(params) {
+        const schema = Joi.object({
+            listName: Joi.string().allow('').required(),
+            backUrlBase64: Joi.string().allow('').required(),
+            descInfo: Joi.string().allow('').required()
+        })
+        const { error } = schema.validate({
+            listName: params.listName,
+            backUrlBase64: params.backUrlBase64,
+            descInfo: params.descInfo
+        })
+        return error;
+    }
+
+    /**
+     *  指定相册添加相片参数校验
+     * @param {*} params {listId, picId, picUrlBase64}
+     */
+    static addPicDetailCheck(params) {
+        const schema = Joi.object({
+            listId: Joi.string().allow('').required(),
+            picUrlBase64: Joi.string().allow('').required()
+        })
+        const { error } = schema.validate({
+            listId: params.listId,
+            picUrlBase64: params.picUrlBase64
+        })
+        return error;
+    }
 }
 
 module.exports = Validate
