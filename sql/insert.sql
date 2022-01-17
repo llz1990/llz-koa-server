@@ -11,6 +11,18 @@ values
         ''
     );
 
+insert into
+    users (userId, name, password, avatar, roles, moment)
+values
+    (
+        '100002',
+        'kobe',
+        '123456',
+        'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2Ffa%2Fae%2F5f%2Ffaae5fe743248d37ef44201105100649.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644890378&t=4bf9556cd64895a40643d3a9e440e80e',
+        'editor',
+        ''
+    );
+
 -- pic_list表插入
 insert into
     pic_list (listId, listName, backUrl, descInfo)
