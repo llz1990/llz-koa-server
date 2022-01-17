@@ -30,7 +30,7 @@ list.post('/addPic', async(ctx, next) =>{
       ctx.throw(400, '参数错误!');
     }
     const listId = `list${Date.now()}`;
-    const backUrl = await Utils.readBase64(backUrlBase64);
+    const backUrl = await Utils.readImgBase64(backUrlBase64);
     const sqlData = await model.addPic(listId, listName, backUrl, descInfo);
     ctx.body = { code: 200, data: sqlData };
   } catch (err) {
@@ -44,7 +44,7 @@ list.post('/addPic', async(ctx, next) =>{
  list.post('/editPic', async(ctx, next) =>{
   try{
     const {listId, listName, backUrlBase64, descInfo } = ctx.request.body
-    const backUrl = await Utils.readBase64(backUrlBase64);
+    const backUrl = await Utils.readImgBase64(backUrlBase64);
     const sqlData = await model.editPic(listId, listName, backUrl, descInfo);
     ctx.body = { code: 200, data: sqlData };
   } catch (err) {
@@ -86,11 +86,43 @@ list.get('/getPicDetail', async(ctx, next) => {
       ctx.throw(400, '参数错误!');
     }
     const picId = `pic${Date.now()}`;
-    const picUrl = await Utils.readBase64(picUrlBase64);
+    const picUrl = await Utils.readImgBase64(picUrlBase64);
     const sqlData = await model.addPicDetail(listId, picId, picUrl);
     ctx.body = { code: 200, data: sqlData };
   } catch (err) {
     ctx.throw(400, '添加相片失败')
+  }
+})
+
+/**
+ * 查询视频合集信息
+ */
+list.get('/getVideoList', async (ctx, next) => {
+  try{
+    const sqlData = await model.selectAllVideos();
+    ctx.body = { code: 200, data: sqlData };
+  }catch(err) {
+    ctx.throw(400, '查询视频失败')
+  }
+})
+
+/**
+ * 添加新的视频文件
+ */
+ list.post('/addVideo', async(ctx, next) =>{
+  try{
+    const { videoTitle, videoBase64 } = ctx.request.body;
+    const validate = Validate.addVideoCheck({ videoTitle, videoBase64 });
+    if (validate) {
+      ctx.throw(400, '参数错误!');
+    }
+    const videoId = `video${Date.now()}`;
+    const videoUrl = await Utils.readVideoBase64(videoBase64);
+    const userInfo = ctx.session;
+    const sqlData = await model.addVideo(videoId, videoTitle, videoUrl,userInfo);
+    ctx.body = { code: 200, data: sqlData };
+  } catch (err) {
+    ctx.throw(400, '添加相册合集失败')
   }
 })
 

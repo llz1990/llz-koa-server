@@ -71,6 +71,18 @@ class Validate {
         })
         return error;
     }
+
+    static addVideoCheck(params) {
+        const schema = Joi.object({
+            videoTitle: Joi.string().allow('').required(),
+            videoBase64: Joi.string().allow('').required()
+        })
+        const { error } = schema.validate({
+            videoTitle: params.videoTitle,
+            videoBase64: params.videoBase64
+        })
+        return error;
+    }
 }
 
 module.exports = Validate

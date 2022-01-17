@@ -87,3 +87,15 @@ exports.addPicDetail = async (listId, picId, picUrl) => {
     let sql = `insert into pic_detail (picId, listId, picUrl) values ("${picId}", "${listId}", "${picUrl}");`;
     return query(sql);
 }
+
+// 查询视频合集
+exports.selectAllVideos = async () => {
+    let sql = `select * from video_list`;
+    return query(sql);
+}
+
+// 增加视频
+exports.addVideo = async (videoId, videoTitle, videoUrl, userInfo) => {
+    let sql = `insert into video_list (videoId, videoTitle, videoImg, videoUrl, videoCreator, creatorAvatar) values ("${videoId}", "${videoTitle}", "", "${videoUrl}", "${userInfo.name}", "${userInfo.avatar}");`;
+    return query(sql);
+}

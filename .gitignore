@@ -2,6 +2,7 @@
 node_modules
 dist
 public/images
+public/videos
 
 # local env files
 .env.local

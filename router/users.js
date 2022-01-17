@@ -38,11 +38,19 @@ users.post('/login', async (ctx, next) => {
   }
   const sqlData = await model.findUserData(name, password);  // 查找用户是否存在
   if (sqlData && sqlData.length > 0) {
-    // 登录后获取token值
+    // 登录后获取token值,同时缓存本地user信息
     const userId = sqlData[0].userId;
     const token = jwtService.sign({
       userId
     });
+    // 登陆成功后设置本地session信息：
+    ctx.session = {
+      userId,
+      name: sqlData[0].name,
+      avatar: sqlData[0].avatar,
+      roles: sqlData[0].roles,
+    };
+    console.log('设置session值 =====>', ctx.session);
     ctx.body = { code: 200, data: token };
   } else {
     ctx.throw(400, '登录账户或者密码错误!');
