@@ -13,3 +13,6 @@ git 提交代码之前执行 git config --global --unset http.proxy (由于本�
  npm start
 
 ```
+
+# 引入 pm2 NODE 服务进行进程监控 
+pm2 start processes.json
