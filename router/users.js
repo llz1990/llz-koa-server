@@ -4,7 +4,7 @@
 const Router = require('koa-router');
 const users = new Router();
 const model = require('../models/index');
-const Validate = require('../common/Validate');
+const Validate = require('../common/validate');
 const crypto = require("crypto");
 const jwtService = require('../common/jwtService');
 

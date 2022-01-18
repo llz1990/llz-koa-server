@@ -5,7 +5,7 @@ const Router = require('koa-router');
 const list = new Router();
 const model = require('../models/index');
 const Utils = require('../common/util');
-const Validate = require('../common/Validate');
+const Validate = require('../common/validate');
 
 /**
  * 取所有相册合集
