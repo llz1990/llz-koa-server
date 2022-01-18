@@ -1,0 +1,12 @@
+2022-01-18 22:05 +08:00:   <-- POST /login
+2022-01-18 22:05 +08:00: 设置session值 =====> {
+2022-01-18 22:05 +08:00:   userId: '100002',
+2022-01-18 22:05 +08:00:   name: 'kobe',
+2022-01-18 22:05 +08:00:   avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2Ffa%2Fae%2F5f%2Ffaae5fe743248d37ef44201105100649.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644890378&t=4bf9556cd64895a40643d3a9e440e80e',
+2022-01-18 22:05 +08:00:   roles: 'editor'
+2022-01-18 22:05 +08:00: }
+2022-01-18 22:05 +08:00: 当前请求方法: POST  当前请求的路径: /login  当前请求的时间: 113ms
+2022-01-18 22:05 +08:00:   --> POST /login 200 138ms 186b
+2022-01-18 22:05 +08:00:   <-- POST /checkToken
+2022-01-18 22:05 +08:00: 当前请求方法: POST  当前请求的路径: /checkToken  当前请求的时间: 14ms
+2022-01-18 22:05 +08:00:   --> POST /checkToken 200 18ms 347b

@@ -3,6 +3,7 @@ node_modules
 dist
 public/images
 public/videos
+logs
 
 # local env files
 .env.local
