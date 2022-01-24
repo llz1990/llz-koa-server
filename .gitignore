@@ -1,8 +1,9 @@
 .DS_Store
 node_modules
 dist
-public/images
-public/videos
+public/images/*.png
+public/images/*.jpeg
+public/videos/*.mp4
 logs
 
 # local env files
