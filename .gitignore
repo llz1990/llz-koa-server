@@ -4,6 +4,9 @@ dist
 public/images/*.png
 public/images/*.jpeg
 public/videos/*.mp4
+public/cache/*.png
+public/cache/*.jpeg
+public/cache/*.mp4
 logs
 
 # local env files

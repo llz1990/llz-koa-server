@@ -4,15 +4,22 @@ const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
-const bodyparser = require('koa-bodyparser')
+const koaBody = require('koa-body');
 const logger = require('koa-logger')
 const session = require('koa-session');
 const errorHandle = require('./router/errorHandle');
+const path = require('path');
 
-//相关中间件 middlewares
-app.use(bodyparser({
-  enableTypes: ['json', 'form', 'text']
-}))
+// 处理请求信息，支持formdata处理：
+app.use(koaBody({
+  multipart: true, // 支持文件上传
+  formidable: {
+    uploadDir: path.join(__dirname, 'public/cache/'), // 设置文件上传目录
+    keepExtensions: true,    // 保持文件的后缀
+    maxFieldsSize: 2 * 1024 * 1024, // 文件上传大小限制
+  }
+}));
+
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))

@@ -42,6 +42,23 @@ class Utils {
             });
         })
     }
+
+    /**
+     * 移动文件
+     * @param {*} oldPath 
+     * @param {*} newPath 
+     */
+    static async renameFile(oldPath, newPath) {
+        return new Promise((resolve, reject) => {
+            fs.rename(oldPath, newPath, (error) => {
+                if(error) {
+                    reject('移动文件失败');
+                } else {
+                    resolve(newPath);
+                }
+            })
+        })
+    }
 }
 
 module.exports = Utils;

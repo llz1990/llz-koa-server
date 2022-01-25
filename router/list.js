@@ -119,8 +119,29 @@ list.get('/getVideoList', async (ctx, next) => {
     const videoId = `video${Date.now()}`;
     const videoUrl = await Utils.readVideoBase64(videoBase64);
     const userInfo = ctx.session;
-    const sqlData = await model.addVideo(videoId, videoTitle, videoUrl,userInfo);
+    const sqlData = await model.addVideo(videoId, videoTitle, videoUrl, userInfo);
     ctx.body = { code: 200, data: sqlData };
+  } catch (err) {
+    ctx.throw(400, '添加相册合集失败')
+  }
+})
+
+/**
+ * 添加新的文件视频 （formadata格式）
+ */
+list.post('/addVideoEx', async (ctx, next) => {
+  try{
+    const { videoTitle } = ctx.request.body; // 取视频文件名字
+    const { videoFileBlob} = ctx.request.files; // ctx.request.files 可以取到dataform数据类型
+    if(videoFileBlob && videoFileBlob.path) {
+      // 将缓存的视频文件移动到指定目录下：
+      const videoUrl = `/videos/${Date.now()}.mp4`;
+      await Utils.renameFile(videoFileBlob.path, `./public` + videoUrl);
+      const videoId = `video${Date.now()}`;
+      const userInfo = ctx.session;
+      const sqlData = await model.addVideo(videoId, videoTitle, videoUrl, userInfo);
+      ctx.body = { code: 200, data: sqlData };
+    }
   } catch (err) {
     ctx.throw(400, '添加相册合集失败')
   }
