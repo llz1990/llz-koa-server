@@ -45,8 +45,8 @@ class Utils {
 
     /**
      * 移动文件
-     * @param {*} oldPath 
-     * @param {*} newPath 
+     * @param {*} oldPath 旧文件目录
+     * @param {*} newPath 新文件目录
      */
     static async renameFile(oldPath, newPath) {
         return new Promise((resolve, reject) => {
