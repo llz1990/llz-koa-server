@@ -52,7 +52,7 @@ list.post('/addPic', async(ctx, next) =>{
   }
 })
 
-list.delete('/deletePic', async(ctx, next) => {
+list.post('/deletePic', async(ctx, next) => {
   try{
     const { listId } = ctx.request.body;
     const sqlData = await model.deletePic(listId);
